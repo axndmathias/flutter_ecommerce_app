@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'widgets/custom_appbar.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -24,30 +26,9 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        title: Container(
-          color: Colors.black,
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-          child: const Text(
-            'Hesperidian',
-            style: TextStyle(
-              color: Colors.white,
-              fontFamily: 'Avenir',
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-        iconTheme: const IconThemeData(color: Colors.black),
-        actions: [
-          IconButton(onPressed: () {}, icon: const Icon(Icons.favorite))
-        ],
-      ),
-      bottomNavigationBar: const BottomAppBar(),
+    return const Scaffold(
+      appBar: CustomAppBar(title: 'Hesperidian'),
+      bottomNavigationBar: BottomAppBar(),
     );
   }
 }
