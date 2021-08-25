@@ -25,7 +25,23 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        title: Container(
+          color: Colors.black,
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          child: const Text(
+            'Hesperidian',
+            style: TextStyle(
+              color: Colors.white,
+              fontFamily: 'Avenir',
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+      ),
       bottomNavigationBar: const BottomAppBar(),
     );
   }
