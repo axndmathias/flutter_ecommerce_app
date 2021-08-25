@@ -26,6 +26,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         backgroundColor: Colors.transparent,
         elevation: 0,
         title: Container(
@@ -41,6 +42,10 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
         ),
+        iconTheme: const IconThemeData(color: Colors.black),
+        actions: [
+          IconButton(onPressed: () {}, icon: const Icon(Icons.favorite))
+        ],
       ),
       bottomNavigationBar: const BottomAppBar(),
     );
