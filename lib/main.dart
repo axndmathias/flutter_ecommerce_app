@@ -26,9 +26,37 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      appBar: CustomAppBar(title: 'Hesperidian'),
-      bottomNavigationBar: BottomAppBar(),
+    return Scaffold(
+      appBar: const CustomAppBar(title: 'Hesperidian'),
+      bottomNavigationBar: BottomAppBar(
+        color: Colors.black,
+        child: SizedBox(
+          height: 70.0,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              IconButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/');
+                },
+                icon: const Icon(Icons.home, color: Colors.white),
+              ),
+              IconButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/cart');
+                },
+                icon: const Icon(Icons.shopping_cart, color: Colors.white),
+              ),
+              IconButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/user');
+                },
+                icon: const Icon(Icons.person, color: Colors.white),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
