@@ -8,12 +8,21 @@ class AppRouter {
 
     switch (settings.name) {
       case '/':
-      return HomeScreen.route();
+        return HomeScreen.route();
+      // ignore: no_duplicate_case_values
       case HomeScreen.routeName:
-      return HomeScreen.route();
+        return HomeScreen.route();
 
       default:
-      return _errorRoute();
+        return _errorRoute();
     }
+  }
+
+  static Route _errorRoute() {
+    return MaterialPageRoute(settings: const RouteSettings(name: '/error'), 
+    builder: (_) => Scaffold(appBar: AppBar(title: const Text('Error')),
+    ),
+  );
+  
   }
 }
