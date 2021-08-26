@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_ecommerce_app/config/app_router.dart';
+import 'package:flutter_ecommerce_app/screens/home/home_screen.dart';
 
 import 'screens/screens.dart';
 import 'widgets/custom_appbar.dart';
@@ -18,6 +20,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
+      onGenerateRoute: AppRouter.onGenarateRoute,
+      initialRoute: HomeScreen.routeName,
       home: const HomeScreen(),
     );
   }
