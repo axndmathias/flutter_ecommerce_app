@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_ecommerce_app/screens/screens.dart';
 import 'package:flutter_ecommerce_app/widgets/widgets.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -8,7 +7,7 @@ class HomeScreen extends StatelessWidget {
   static const String routeName = '/';
 
   static Route route() {
-    return MaterialPageRoute(settings: const RouteSettings(name: routeName), builder: (_)=> const HomeScreen());
+    return MaterialPageRoute(settings: const RouteSettings(name: routeName), builder: (_) => const HomeScreen());
   }
 
   @override

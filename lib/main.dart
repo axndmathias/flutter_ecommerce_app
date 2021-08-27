@@ -3,8 +3,6 @@ import 'package:flutter_ecommerce_app/config/app_router.dart';
 import 'package:flutter_ecommerce_app/screens/home/home_screen.dart';
 
 import 'screens/screens.dart';
-import 'widgets/custom_appbar.dart';
-import 'widgets/custom_navbar.dart';
 
 void main() {
   runApp(const MyApp());
