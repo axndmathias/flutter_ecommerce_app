@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/screens/cart/cart_screen.dart';
 import 'package:flutter_ecommerce_app/screens/home/home_screen.dart';
+import 'package:flutter_ecommerce_app/screens/wishlist/wishlist_screen.dart';
 
 class AppRouter {
   static Route onGenarateRoute(RouteSettings settings) {
@@ -16,6 +17,9 @@ class AppRouter {
 
       case CartScreen.routeName:
         return CartScreen.route();
+
+      case WishlistScreen.routeName:
+        return WishlistScreen.route();
 
       default:
         return _errorRoute();
