@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_ecommerce_app/screens/cart/cart_screen.dart';
 import 'package:flutter_ecommerce_app/screens/home/home_screen.dart';
 
 class AppRouter {
@@ -12,6 +13,9 @@ class AppRouter {
       // ignore: no_duplicate_case_values
       case HomeScreen.routeName:
         return HomeScreen.route();
+
+      case CartScreen.routeName:
+        return CartScreen.route();
 
       default:
         return _errorRoute();
