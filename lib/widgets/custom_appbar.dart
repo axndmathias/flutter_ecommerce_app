@@ -15,18 +15,15 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
       backgroundColor: Colors.transparent,
       elevation: 0,
       title: Container(
-        color: Colors.black,
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-        child: Text(
-          title,
-          style: const TextStyle(
-            color: Colors.white,
-            fontFamily: 'Avenir',
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
+          color: Colors.black,
+          padding: const EdgeInsets.symmetric(
+            horizontal: 20,
+            vertical: 10,
           ),
-        ),
-      ),
+          child: Text(title,
+              style: Theme.of(context).textTheme.headline3!.copyWith(
+                    color: Colors.white,
+                  ))),
       iconTheme: const IconThemeData(color: Colors.black),
       actions: [
         IconButton(
