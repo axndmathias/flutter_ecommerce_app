@@ -21,20 +21,32 @@ class HomeScreen extends StatelessWidget {
       appBar: const CustomAppBar(title: 'Hesperidian'),
       bottomNavigationBar: const CustomNavBar(),
       // ignore: avoid_unnecessary_containers
-      body: Container(
-        child: CarouselSlider(
-          options: CarouselOptions(
-            aspectRatio: 2.0,
-            viewportFraction: 0.9,
-            enlargeCenterPage: true,
-            enlargeStrategy: CenterPageEnlargeStrategy.height,
+      body: Column(
+        children: [
+          // ignore: avoid_unnecessary_containers
+          Container(
+            child: CarouselSlider(
+              options: CarouselOptions(
+                aspectRatio: 2.0,
+                viewportFraction: 0.9,
+                enlargeCenterPage: true,
+                enlargeStrategy: CenterPageEnlargeStrategy.height,
+              ),
+              items: Category.categories
+                  .map((category) => HeroCarouselCard(category: category))
+                  .toList(),
+            ),
           ),
-          items: Category.categories
-              .map((category) => HeroCarouselCard(category: category))
-              .toList(),
-        ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            child: Align(
+              alignment: Alignment.topLeft,
+              child: Text('RECOMMENDED',
+                  style: Theme.of(context).textTheme.headline3),
+            ),
+          ),
+        ],
       ),
     );
   }
 }
-
