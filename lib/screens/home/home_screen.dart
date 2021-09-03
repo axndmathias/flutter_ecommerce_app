@@ -1,3 +1,4 @@
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/models/models.dart';
@@ -37,16 +38,10 @@ class HomeScreen extends StatelessWidget {
                   .toList(),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0),
-            child: Align(
-              alignment: Alignment.topLeft,
-              child: Text('RECOMMENDED',
-                  style: Theme.of(context).textTheme.headline3),
-            ),
-          ),
+          const SectionTitle(title: 'RECOMMENDED'),
         ],
       ),
     );
   }
 }
+
