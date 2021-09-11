@@ -42,22 +42,11 @@ class HomeScreen extends StatelessWidget {
           // Product Card
           // ProductCard(product: Product.products[0]),
           // Product Carousel
-          SizedBox(
-            height: 165,
-            child: ListView.builder(
-                shrinkWrap: true,
-                padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-                scrollDirection: Axis.horizontal,
-                itemCount: Product.products.length,
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.only(right: 5.0),
-                    child: ProductCard(product: Product.products[index]),
-                  );
-                }),
-          ),
+          ProductCarousel(products: Product.products),
         ],
       ),
     );
   }
 }
+
+
