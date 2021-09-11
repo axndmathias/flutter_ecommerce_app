@@ -39,14 +39,13 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
           const SectionTitle(title: 'RECOMMENDED'),
-          // Product Card
-          // ProductCard(product: Product.products[0]),
-          // Product Carousel
-          ProductCarousel(products: Product.products),
+       
+          ProductCarousel(
+              products: Product.products
+                  .where((product) => product.isRecommended)
+                  .toList()),
         ],
       ),
     );
   }
 }
-
-
