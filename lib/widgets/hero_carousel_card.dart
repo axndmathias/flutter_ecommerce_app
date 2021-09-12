@@ -4,7 +4,7 @@ import 'package:flutter_ecommerce_app/models/models.dart';
 class HeroCarouselCard extends StatelessWidget {
   final Category category;
 
-  const HeroCarouselCard({
+const HeroCarouselCard({
     required this.category,
   });
 

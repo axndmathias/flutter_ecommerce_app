@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_ecommerce_app/models/product_model.dart';
 import 'package:flutter_ecommerce_app/screens/cart/cart_screen.dart';
 import 'package:flutter_ecommerce_app/screens/home/home_screen.dart';
 import 'package:flutter_ecommerce_app/screens/screens.dart';
@@ -23,7 +24,7 @@ class AppRouter {
         return WishlistScreen.route();
 
       case ProductScreen.routeName:
-      return ProductScreen.route();
+      return ProductScreen.route(product: settings.arguments as Product);
 
       default:
         return _errorRoute();

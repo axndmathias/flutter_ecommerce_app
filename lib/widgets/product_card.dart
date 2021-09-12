@@ -11,7 +11,6 @@ class ProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // navigation
 
     return InkWell(
       onTap: () {
