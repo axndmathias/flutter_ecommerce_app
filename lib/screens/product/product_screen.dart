@@ -28,19 +28,64 @@ class ProductScreen extends StatelessWidget {
       appBar: CustomAppBar(title: product.name),
       bottomNavigationBar: const CustomNavBar(),
       body: ListView(
-        children: [CarouselSlider(
-          options: CarouselOptions(
-            aspectRatio: 2.0,
-            viewportFraction: 0.9,
-            enlargeCenterPage: true,
-            enlargeStrategy: CenterPageEnlargeStrategy.height,
-          ),
-          items: [
-            HeroCarouselCard(
-              product: product,
+        children: [
+          CarouselSlider(
+            options: CarouselOptions(
+              aspectRatio: 2.0,
+              viewportFraction: 0.9,
+              enlargeCenterPage: true,
+              enlargeStrategy: CenterPageEnlargeStrategy.height,
             ),
-          ],
-        ),
+            items: [
+              HeroCarouselCard(
+                product: product,
+              ),
+            ],
+          ),
+          // Name & Price
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            child: Stack(
+              children: [
+                Container(
+                  width: MediaQuery.of(context).size.width,
+                  height: 60,
+                  alignment: Alignment.bottomCenter,
+                  color: Colors.black.withAlpha(50),
+                ),
+                Container(
+                  margin: const EdgeInsets.all(5.0),
+                  width: MediaQuery.of(context).size.width - 10,
+                  height: 50,
+                  alignment: Alignment.bottomCenter,
+                  color: Colors.black,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          product.name,
+                          style: Theme.of(context)
+                              .textTheme
+                              .headline5!
+                              .copyWith(color: Colors.white),
+                        ),
+                        Text(
+                          '${product.price}',
+                          style: Theme.of(context)
+                              .textTheme
+                              .headline5!
+                              .copyWith(color: Colors.white),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
         ],
       ),
     );
