@@ -42,7 +42,6 @@ class ProductScreen extends StatelessWidget {
               ),
             ],
           ),
-          // Name & Price
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0),
             child: Stack(
@@ -60,7 +59,8 @@ class ProductScreen extends StatelessWidget {
                   alignment: Alignment.bottomCenter,
                   color: Colors.black,
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20.0, vertical: 10.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -82,6 +82,38 @@ class ProductScreen extends StatelessWidget {
                       ],
                     ),
                   ),
+                ),
+              ],
+            ),
+          ),
+          Padding(
+            padding:
+                const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+            child: ExpansionTile(
+              initiallyExpanded: true,
+              title: Text('Product Information',
+                  style: Theme.of(context).textTheme.headline3),
+              children: [
+                ListTile(
+                  title: Text(
+                      'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.',
+                      style: Theme.of(context).textTheme.bodyText1),
+                ),
+              ],
+            ),
+          ),
+           Padding(
+            padding:
+                const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+            child: ExpansionTile(
+              initiallyExpanded: true,
+              title: Text('Delivery Information',
+                  style: Theme.of(context).textTheme.headline3),
+              children: [
+                ListTile(
+                  title: Text(
+                      'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.',
+                      style: Theme.of(context).textTheme.bodyText1),
                 ),
               ],
             ),
