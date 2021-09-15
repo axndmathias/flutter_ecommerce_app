@@ -16,8 +16,6 @@ class ProductScreen extends StatelessWidget {
     );
   }
 
-// product images carousel
-
   final Product product;
 
   const ProductScreen({required this.product});
@@ -26,7 +24,37 @@ class ProductScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(title: product.name),
-      bottomNavigationBar: const CustomNavBar(),
+
+      // bottom nab bar
+      bottomNavigationBar: BottomAppBar(
+        color: Colors.black,
+        child: Container(
+          height: 70,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              IconButton(
+                  onPressed: () {},
+                  icon: const Icon(
+                    Icons.share,
+                    color: Colors.white,
+                  )),
+              IconButton(
+                  onPressed: () {},
+                  icon: const Icon(
+                    Icons.favorite,
+                    color: Colors.white,
+                  )),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(primary: Colors.white),
+                onPressed: () {},
+                child: Text('ADD TO CART',
+                    style: Theme.of(context).textTheme.headline3!),
+              ),
+            ],
+          ),
+        ),
+      ),
       body: ListView(
         children: [
           CarouselSlider(
@@ -102,7 +130,7 @@ class ProductScreen extends StatelessWidget {
               ],
             ),
           ),
-           Padding(
+          Padding(
             padding:
                 const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
             child: ExpansionTile(
