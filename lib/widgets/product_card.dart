@@ -5,12 +5,15 @@ import 'package:flutter_ecommerce_app/models/models.dart';
 class ProductCard extends StatelessWidget {
   final Product product;
   final double widthFactor;
+  final double leftPosition;
+  final bool isWishlist;
 
   const ProductCard({
     Key? key,
     required this.product,
-    this.widthFactor = 2.25,
-
+    this.widthFactor = 2.5,
+    this.leftPosition = 5,
+    this.isWishlist = false,
   }) : super(key: key);
 
   @override
@@ -34,9 +37,9 @@ class ProductCard extends StatelessWidget {
           ),
           Positioned(
             top: 60,
-            left: 5,
+            left: leftPosition,
             child: Container(
-              width: widthValue -10,
+              width: widthValue - 5 - leftPosition,
               height: 80,
               alignment: Alignment.bottomCenter,
               decoration: BoxDecoration(
@@ -46,9 +49,9 @@ class ProductCard extends StatelessWidget {
           ),
           Positioned(
             top: 65,
-            left: 10,
+            left: leftPosition + 5,
             child: Container(
-              width: widthValue - 20,
+              width: widthValue - 15 - leftPosition,
               height: 70,
               alignment: Alignment.bottomCenter,
               decoration: const BoxDecoration(
@@ -67,6 +70,8 @@ class ProductCard extends StatelessWidget {
                         children: [
                           Text(
                             product.name,
+                            softWrap: true,
+                            maxLines: 1,
                             style:
                                 Theme.of(context).textTheme.headline6!.copyWith(
                                       color: Colors.white,
@@ -91,6 +96,16 @@ class ProductCard extends StatelessWidget {
                         ),
                       ),
                     ),
+                    isWishlist ? Expanded(
+                      child: IconButton(
+                        onPressed: () {},
+                        icon: const Icon(
+                          Icons.delete,
+                          color: Colors.white,
+                        ),
+                      ),
+                    )
+                    : const SizedBox(),
                   ],
                 ),
               ),
