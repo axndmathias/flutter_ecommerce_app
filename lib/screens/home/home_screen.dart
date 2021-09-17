@@ -27,7 +27,7 @@ class HomeScreen extends StatelessWidget {
           Container(
             child: CarouselSlider(
               options: CarouselOptions(
-                aspectRatio: 2.0,
+                aspectRatio: 1.5,
                 viewportFraction: 0.9,
                 enlargeCenterPage: true,
                 enlargeStrategy: CenterPageEnlargeStrategy.height,
@@ -37,6 +37,8 @@ class HomeScreen extends StatelessWidget {
                   .toList(),
             ),
           ),
+          
+          // recommended produtcs
           const SectionTitle(title: 'RECOMMENDED'),
           ProductCarousel(
               products: Product.products
