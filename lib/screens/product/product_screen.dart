@@ -1,7 +1,5 @@
 // ignore_for_file: use_key_in_widget_constructors
 
-import 'dart:js';
-
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -50,6 +48,9 @@ class ProductScreen extends StatelessWidget {
                         context
                             .read<WishlistBloc>()
                             .add(AddWishlistProduct(product));
+
+                            final snackBar = SnackBar(content: Text('Added to your Wishlist!'));
+                            ScaffoldMessenger.of(context).showSnackBar(snackBar);
                       },
                       icon: const Icon(
                         Icons.favorite,
@@ -126,6 +127,7 @@ class ProductScreen extends StatelessWidget {
               ],
             ),
           ),
+          // product information
           Padding(
             padding:
                 const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
@@ -142,6 +144,7 @@ class ProductScreen extends StatelessWidget {
               ],
             ),
           ),
+          // delivery information
           Padding(
             padding:
                 const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
