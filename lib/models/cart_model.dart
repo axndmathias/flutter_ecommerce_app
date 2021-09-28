@@ -1,9 +1,33 @@
+// ignore_for_file: prefer_collection_literals, avoid_types_as_parameter_names, avoid_function_literals_in_foreach_calls
+
 import 'package:equatable/equatable.dart';
 import 'package:flutter_ecommerce_app/models/product_model.dart';
 
+
+
 class Cart extends Equatable {
   final List<Product> products;
+
   const Cart({this.products = const <Product>[]});
+
+  @override
+  List<Object?> get props => [products];
+
+  
+  // ignore: non_constant_identifier_names
+  Map productQuantity(Product) {
+    
+    var quantity = Map();
+
+    products.forEach((product) {
+      if (!quantity.containsKey(product)) {
+        quantity[product] = 1;
+      } else {
+        quantity[product] += 1;
+      }
+    });
+    return quantity;
+  }
 
   double get subtotal =>
       products.fold(0, (total, current) => total + current.price);
@@ -36,7 +60,4 @@ class Cart extends Equatable {
   String get deliveryFeeString => deliveryFee(subtotal).toStringAsFixed(2);
 
   String get freeDeliveryString => freeDelivery(subtotal);
-
-  @override
-  List<Object?> get props => [products];
 }

@@ -4,10 +4,12 @@ import 'package:flutter_ecommerce_app/blocs/cart/cart_bloc.dart';
 import 'package:flutter_ecommerce_app/blocs/wishlist/wishlist_bloc.dart';
 import 'package:flutter_ecommerce_app/config/app_router.dart';
 import 'package:flutter_ecommerce_app/screens/home/home_screen.dart';
+import 'package:flutter_ecommerce_app/simple_bloc_observer.dart';
 
 import 'screens/screens.dart';
 
-void main() {
+void main() async {
+  Bloc.observer = SimpleBlocObserver();
   runApp(const MyApp());
 }
 
@@ -27,7 +29,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
         ),
         onGenerateRoute: AppRouter.onGenarateRoute,
-        initialRoute: HomeScreen.routeName,
+        initialRoute: SplashScreen.routeName,
         home: const HomeScreen(),
       ),
     );

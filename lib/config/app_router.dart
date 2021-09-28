@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/models/category_model.dart';
 import 'package:flutter_ecommerce_app/models/product_model.dart';
-import 'package:flutter_ecommerce_app/screens/cart/cart_screen.dart';
-import 'package:flutter_ecommerce_app/screens/catalog/catalog_screen.dart';
-import 'package:flutter_ecommerce_app/screens/home/home_screen.dart';
 import 'package:flutter_ecommerce_app/screens/screens.dart';
-import 'package:flutter_ecommerce_app/screens/wishlist/wishlist_screen.dart';
+
 
 class AppRouter {
   static Route onGenarateRoute(RouteSettings settings) {
@@ -18,6 +15,9 @@ class AppRouter {
       // ignore: no_duplicate_case_values
       case HomeScreen.routeName:
         return HomeScreen.route();
+
+        case SplashScreen.routeName:
+        return SplashScreen.route();
 
       case CartScreen.routeName:
         return CartScreen.route();

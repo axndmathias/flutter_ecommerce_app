@@ -4,12 +4,16 @@ import 'package:flutter_ecommerce_app/blocs/cart/cart_bloc.dart';
 import 'package:flutter_ecommerce_app/models/models.dart';
 
 class CartProductCard extends StatelessWidget {
-  final Product product;
+  
 
   const CartProductCard({
     Key? key,
     required this.product,
+    required this.quantity,
   }) : super(key: key);
+
+  final Product product;
+  final int quantity;
 
   @override
   Widget build(BuildContext context) {
@@ -42,23 +46,33 @@ class CartProductCard extends StatelessWidget {
           const SizedBox(width: 10),
           BlocBuilder<CartBloc, CartState>(
             builder: (context, state) {
-              return Row(
-                children: [
-                  IconButton(
-                    onPressed: () {
-                      context.read<CartBloc>().add(CartProductRemoved(product));
-                    },
-                    icon: const Icon(Icons.remove_circle),
-                  ),
-                  Text('1', style: Theme.of(context).textTheme.headline5),
-                  IconButton(
-                    onPressed: () {
-                      context.read<CartBloc>().add(CartProductAdded(product));
-                    },
-                    icon: const Icon(Icons.add_circle),
-                  ),
-                ],
-              );
+              if (state is CartLoading) {
+                return const CircularProgressIndicator();
+              }
+              if (state is CartLoaded) {
+                return Row(
+                  children: [
+                    IconButton(
+                      onPressed: () {
+                        context
+                            .read<CartBloc>()
+                            .add(CartProductRemoved(product));
+                      },
+                      icon: const Icon(Icons.remove_circle),
+                    ),
+                    Text('$quantity', style: Theme.of(context).textTheme.headline5),
+                    IconButton(
+                      onPressed: () {
+                        context.read<CartBloc>().add(CartProductAdded(product));
+
+                       
+                      },
+                      icon: const Icon(Icons.add_circle),
+                    ),
+                  ],
+                );
+              }
+              return const Text('Something went wrong');
             },
           ),
         ],

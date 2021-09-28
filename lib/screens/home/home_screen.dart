@@ -18,7 +18,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(title: 'Hesperidian'),
+      appBar: const CustomAppBar(title: 'hesperidian'),
       bottomNavigationBar: const CustomNavBar(),
       // ignore: avoid_unnecessary_containers
       body: Column(
