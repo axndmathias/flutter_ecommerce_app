@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_ecommerce_app/models/product_model.dart';
 
 class CustomNavBar extends StatelessWidget {
+  final String screen;
+  final Product? product;
+
   const CustomNavBar({
     Key? key,
+    required this.screen,
+    this.product,
   }) : super(key: key);
 
   @override
