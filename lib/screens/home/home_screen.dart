@@ -1,5 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_ecommerce_app/blocs/category/category_bloc.dart';
 import 'package:flutter_ecommerce_app/models/models.dart';
 import 'package:flutter_ecommerce_app/widgets/widgets.dart';
 
@@ -24,20 +26,31 @@ class HomeScreen extends StatelessWidget {
       body: Column(
         children: [
           // ignore: avoid_unnecessary_containers
-          Container(
-            child: CarouselSlider(
-              options: CarouselOptions(
-                aspectRatio: 1.5,
-                viewportFraction: 0.9,
-                enlargeCenterPage: true,
-                enlargeStrategy: CenterPageEnlargeStrategy.height,
-              ),
-              items: Category.categories
-                  .map((category) => HeroCarouselCard(category: category))
-                  .toList(),
-            ),
+          BlocBuilder<CategoryBloc, CategoryState>(
+            builder: (context, state) {
+              if (state is CategoryLoading) {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+              if (state is CategoryLoaded) {
+                return CarouselSlider(
+                  options: CarouselOptions(
+                    aspectRatio: 1.5,
+                    viewportFraction: 0.9,
+                    enlargeCenterPage: true,
+                    enlargeStrategy: CenterPageEnlargeStrategy.height,
+                  ),
+                  items: state.categories
+                      .map((category) => HeroCarouselCard(category: category))
+                      .toList(),
+                );
+              } else {
+                return const Text('Something went wrong.');
+              }
+            },
           ),
-          
+
           // recommended produtcs
           const SectionTitle(title: 'RECOMMENDED'),
           ProductCarousel(
@@ -45,8 +58,8 @@ class HomeScreen extends StatelessWidget {
                   .where((product) => product.isRecommended)
                   .toList()),
 
-        // Popular Products
-        const SectionTitle(title: 'MOST POPULAR'),
+          // Popular Products
+          const SectionTitle(title: 'MOST POPULAR'),
           ProductCarousel(
               products: Product.products
                   .where((product) => product.isPopular)
