@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter_ecommerce_app/models/models.dart';
+
 
 class Product extends Equatable {
   final String name;

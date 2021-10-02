@@ -8,7 +8,6 @@ import 'package:flutter_ecommerce_app/blocs/wishlist/wishlist_bloc.dart';
 import 'package:flutter_ecommerce_app/config/app_router.dart';
 import 'package:flutter_ecommerce_app/repositories/category/category_repository.dart';
 import 'package:flutter_ecommerce_app/repositories/product/product_repository.dart';
-import 'package:flutter_ecommerce_app/screens/home/home_screen.dart';
 import 'package:flutter_ecommerce_app/simple_bloc_observer.dart';
 
 import 'config/theme.dart';
@@ -47,8 +46,8 @@ class MyApp extends StatelessWidget {
         theme: theme(),
         debugShowCheckedModeBanner: false,
         onGenerateRoute: AppRouter.onGenarateRoute,
-        initialRoute: SplashScreen.routeName,
-        home: const HomeScreen(),
+        initialRoute: CheckoutScreen.routeName,
+        
       ),
     );
   }
