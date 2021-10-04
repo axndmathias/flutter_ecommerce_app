@@ -39,10 +39,10 @@ class CustomNavBar extends StatelessWidget {
         return _buildNavBar(context);
       case '/product':
         return _buildAddToCartNavBar(context, product);
-      // case '/cart':
-      //   return _buildGoToCheckoutNavBar(context);
-      // case '/checkout':
-      //   return _buildOrderNowNavBar(context);
+      case '/cart':
+        return _buildGoToCheckoutNavBar(context);
+      case '/checkout':
+        return _buildOrderNowNavBar(context);
 
       default:
         _buildNavBar(context);
@@ -74,7 +74,7 @@ class CustomNavBar extends StatelessWidget {
   }
 }
 
-// 
+// build add to cart nav bar
  // ignore: unused_element
  List<Widget> _buildAddToCartNavBar(context, product) {
     return [
@@ -124,6 +124,44 @@ class CustomNavBar extends StatelessWidget {
           }
           return const Text('Something went wrong!');
         },
+      )
+    ];
+  }
+
+// bluid go to checkout nav bar
+List<Widget> _buildGoToCheckoutNavBar(context) {
+    return [
+      ElevatedButton(
+        onPressed: () {
+          Navigator.pushNamed(context, '/checkout');
+        },
+        style: ElevatedButton.styleFrom(
+          primary: Colors.white,
+          shape: const RoundedRectangleBorder(),
+        ),
+        child: Text(
+          'GO TO CHECKOUT',
+          style: Theme.of(context).textTheme.headline3,
+        ),
+      )
+    ];
+  }
+
+// build order now nav bar
+List<Widget> _buildOrderNowNavBar(context) {
+    return [
+      ElevatedButton(
+        onPressed: () {
+          
+        },
+        style: ElevatedButton.styleFrom(
+          primary: Colors.white,
+          shape: const RoundedRectangleBorder(),
+        ),
+        child: Text(
+          'ORDER NOW',
+          style: Theme.of(context).textTheme.headline3,
+        ),
       )
     ];
   }
