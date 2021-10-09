@@ -40,6 +40,7 @@ class CheckoutScreen extends StatelessWidget {
             _buildTextFormField(nameController, context, 'Full Name'),
 
             // delivery information
+            const SizedBox(height: 20.0),
             Text(
               'DELIVERY INFORMATION',
               style: Theme.of(context).textTheme.headline3,
@@ -48,8 +49,39 @@ class CheckoutScreen extends StatelessWidget {
             _buildTextFormField(cityController, context, 'City'),
             _buildTextFormField(countryController, context, 'Country'),
             _buildTextFormField(zipCodeController, context, 'Zip Code'),
-            
+
+            // select a payment method
+            const SizedBox(height: 20.0),
+            Container(
+              width: MediaQuery.of(context).size.width,
+              height: 60,
+              alignment: Alignment.bottomCenter,
+              decoration: const BoxDecoration(color: Colors.black),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Center(
+                    child: Text(
+                      'SELECT A PAYMENT METHOD',
+                      style: Theme.of(context)
+                          .textTheme
+                          .headline3!
+                          .copyWith(color: Colors.white),
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: () {},
+                    icon: const Icon(
+                      Icons.arrow_forward,
+                      color: Colors.white,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
             // order summary
+            const SizedBox(height: 20.0),
             Text(
               'ORDER SUMMARY',
               style: Theme.of(context).textTheme.headline3,
