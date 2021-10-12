@@ -1,8 +1,60 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter_ecommerce_app/models/product_model.dart';
 
-class Checkout extends Equatable{
+class Checkout extends Equatable {
+  final String? fullName;
+  final String? email;
+  final String? address;
+  final String? city;
+  final String? country;
+  final String? zipCode;
+  final List<Product>? products;
+  final String? subtotal;
+  final String? delivryFee;
+  final String? total;
+
+  const Checkout({
+    required this.fullName,
+    required this.email,
+    required this.address,
+    required this.city,
+    required this.country,
+    required this.zipCode,
+    required this.products,
+    required this.subtotal,
+    required this.delivryFee,
+    required this.total,
+  });
+
   @override
-  
-  List<Object?> get props => [];
+  List<Object?> get props => [
+        fullName,
+        email,
+        address,
+        city,
+        country,
+        zipCode,
+        products,
+        subtotal,
+        delivryFee,
+        total
+      ];
 
+  Map<String, Object> toDocument() {
+    Map customerAddress = {};
+    customerAddress["address"] = address;
+    customerAddress["city"] = city;
+    customerAddress["country"] = country;
+    customerAddress["zipCode"] = zipCode;
+
+    return {
+      'customerAddress': customerAddress,
+      'customerName': fullName!,
+      'customerEmail': email!,
+      'products': products!.map((product) => product.name).toList(),
+      'subtotal': subtotal!,
+      'deliveryFee': delivryFee!,
+      'total': total!,
+    };
+  }
 }
