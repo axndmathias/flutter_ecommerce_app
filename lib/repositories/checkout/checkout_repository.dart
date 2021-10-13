@@ -11,6 +11,6 @@ class CheckoutRepository extends BaseCheckoutRepository {
 
   @override
   Future<void> addCheckout(Checkout checkout) {
-    return _firebaseFirestore.collection("checkout").add(checkout.toDocument());
+    return _firebaseFirestore.collection('checkout').add(checkout.toDocument());
   }
 }
