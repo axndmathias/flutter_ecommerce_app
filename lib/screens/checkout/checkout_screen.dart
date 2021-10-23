@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_ecommerce_app/blocs/checkout/checkout_bloc.dart';
 import 'package:flutter_ecommerce_app/widgets/widgets.dart';
 
 class CheckoutScreen extends StatelessWidget {
@@ -15,86 +17,118 @@ class CheckoutScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final TextEditingController emailController = TextEditingController();
-    final TextEditingController nameController = TextEditingController();
-    final TextEditingController addressController = TextEditingController();
-    final TextEditingController cityController = TextEditingController();
-    final TextEditingController countryController = TextEditingController();
-    final TextEditingController zipCodeController = TextEditingController();
-
     return Scaffold(
       appBar: const CustomAppBar(title: 'Checkout'),
       bottomNavigationBar: const CustomNavBar(screen: routeName),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // customer information
-            Text(
-              'CUSTOMER INFORMATION',
-              style: Theme.of(context).textTheme.headline3,
-            ),
-            _buildTextFormField(emailController, context, 'Email'),
-            _buildTextFormField(nameController, context, 'Full Name'),
-
-            // delivery information
-            const SizedBox(height: 20.0),
-            Text(
-              'DELIVERY INFORMATION',
-              style: Theme.of(context).textTheme.headline3,
-            ),
-            _buildTextFormField(addressController, context, 'Address'),
-            _buildTextFormField(cityController, context, 'City'),
-            _buildTextFormField(countryController, context, 'Country'),
-            _buildTextFormField(zipCodeController, context, 'Zip Code'),
-
-            // select a payment method
-            const SizedBox(height: 20.0),
-            Container(
-              width: MediaQuery.of(context).size.width,
-              height: 60,
-              alignment: Alignment.bottomCenter,
-              decoration: const BoxDecoration(color: Colors.black),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+        child: BlocBuilder<CheckoutBloc, CheckoutState>(
+          builder: (context, state) {
+            if (state is CheckoutLoading) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+            if (state is CheckoutLoaded) {
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Center(
-                    child: Text(
-                      'SELECT A PAYMENT METHOD',
-                      style: Theme.of(context)
-                          .textTheme
-                          .headline3!
-                          .copyWith(color: Colors.white),
-                    ),
+                  // customer information
+                  Text(
+                    'CUSTOMER INFORMATION',
+                    style: Theme.of(context).textTheme.headline3,
                   ),
-                  IconButton(
-                    onPressed: () {},
-                    icon: const Icon(
-                      Icons.arrow_forward,
-                      color: Colors.white,
-                    ),
-                  ),
-                ],
-              ),
-            ),
+                  _buildTextFormField((value) {
+                    context.read<CheckoutBloc>().add(
+                          UpdateCheckout(email: value),
+                        );
+                  }, context, 'Email'),
 
-            // order summary
-            const SizedBox(height: 20.0),
-            Text(
-              'ORDER SUMMARY',
-              style: Theme.of(context).textTheme.headline3,
-            ),
-            const OrderSummary(),
-          ],
+                  _buildTextFormField((value) {
+                    context.read<CheckoutBloc>().add(
+                          UpdateCheckout(fullName: value),
+                        );
+                  }, context, 'Full Name'),
+
+                  // delivery information
+                  const SizedBox(height: 20.0),
+                  Text(
+                    'DELIVERY INFORMATION',
+                    style: Theme.of(context).textTheme.headline3,
+                  ),
+                  _buildTextFormField((value) {
+                    context.read<CheckoutBloc>().add(
+                          UpdateCheckout(address: value),
+                        );
+                  }, context, 'Address'),
+
+                  _buildTextFormField((value) {
+                    context.read<CheckoutBloc>().add(
+                          UpdateCheckout(city: value),
+                        );
+                  }, context, 'City'),
+                  _buildTextFormField((value) {
+                    context.read<CheckoutBloc>().add(
+                          UpdateCheckout(country: value),
+                        );
+                  }, context, 'Country'),
+                  _buildTextFormField((value) {
+                    context.read<CheckoutBloc>().add(
+                          UpdateCheckout(zipCode: value),
+                        );
+                  }, context, 'Zip Code'),
+
+                  // select a payment method
+                  const SizedBox(height: 20.0),
+                  Container(
+                    width: MediaQuery.of(context).size.width,
+                    height: 60,
+                    alignment: Alignment.bottomCenter,
+                    decoration: const BoxDecoration(color: Colors.black),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Center(
+                          child: Text(
+                            'SELECT A PAYMENT METHOD',
+                            style: Theme.of(context)
+                                .textTheme
+                                .headline3!
+                                .copyWith(color: Colors.white),
+                          ),
+                        ),
+                        IconButton(
+                          onPressed: () {},
+                          icon: const Icon(
+                            Icons.arrow_forward,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  // order summary
+                  const SizedBox(height: 20.0),
+                  Text(
+                    'ORDER SUMMARY',
+                    style: Theme.of(context).textTheme.headline3,
+                  ),
+                  const OrderSummary(),
+                ],
+              );
+            } else {
+              return const Text('Something went wrong');
+            }
+          },
         ),
       ),
     );
   }
 
   Padding _buildTextFormField(
-    TextEditingController controller,
+    Function(String)? onChanged,
     BuildContext context,
     String labelText,
   ) {
@@ -111,7 +145,7 @@ class CheckoutScreen extends StatelessWidget {
           ),
           Expanded(
             child: TextFormField(
-              controller: controller,
+              onChanged: onChanged,
               decoration: const InputDecoration(
                 isDense: true,
                 contentPadding: EdgeInsets.only(left: 10.0),
