@@ -6,12 +6,10 @@ import 'package:flutter_ecommerce_app/widgets/widgets.dart';
 class CheckoutScreen extends StatelessWidget {
   static const String routeName = '/checkout';
 
-  const CheckoutScreen({Key? key}) : super(key: key);
-
   static Route route() {
     return MaterialPageRoute(
       settings: const RouteSettings(name: routeName),
-      builder: (context) => const CheckoutScreen(),
+      builder: (context) => CheckoutScreen(),
     );
   }
 
@@ -40,47 +38,43 @@ class CheckoutScreen extends StatelessWidget {
                     style: Theme.of(context).textTheme.headline3,
                   ),
                   _buildTextFormField((value) {
-                    context.read<CheckoutBloc>().add(
-                          UpdateCheckout(email: value),
-                        );
+                    context
+                        .read<CheckoutBloc>()
+                        .add(UpdateCheckout(email: value));
                   }, context, 'Email'),
-
                   _buildTextFormField((value) {
-                    context.read<CheckoutBloc>().add(
-                          UpdateCheckout(fullName: value),
-                        );
+                    context
+                        .read<CheckoutBloc>()
+                        .add(UpdateCheckout(fullName: value));
                   }, context, 'Full Name'),
-
+                  const SizedBox(height: 20),
                   // delivery information
-                  const SizedBox(height: 20.0),
                   Text(
                     'DELIVERY INFORMATION',
                     style: Theme.of(context).textTheme.headline3,
                   ),
                   _buildTextFormField((value) {
-                    context.read<CheckoutBloc>().add(
-                          UpdateCheckout(address: value),
-                        );
+                    context
+                        .read<CheckoutBloc>()
+                        .add(UpdateCheckout(address: value));
                   }, context, 'Address'),
-
                   _buildTextFormField((value) {
-                    context.read<CheckoutBloc>().add(
-                          UpdateCheckout(city: value),
-                        );
+                    context
+                        .read<CheckoutBloc>()
+                        .add(UpdateCheckout(city: value));
                   }, context, 'City'),
                   _buildTextFormField((value) {
-                    context.read<CheckoutBloc>().add(
-                          UpdateCheckout(country: value),
-                        );
+                    context
+                        .read<CheckoutBloc>()
+                        .add(UpdateCheckout(country: value));
                   }, context, 'Country'),
                   _buildTextFormField((value) {
-                    context.read<CheckoutBloc>().add(
-                          UpdateCheckout(zipCode: value),
-                        );
-                  }, context, 'Zip Code'),
-
+                    context
+                        .read<CheckoutBloc>()
+                        .add(UpdateCheckout(zipCode: value));
+                  }, context, 'ZIP Code'),
+                  const SizedBox(height: 20),
                   // select a payment method
-                  const SizedBox(height: 20.0),
                   Container(
                     width: MediaQuery.of(context).size.width,
                     height: 60,
@@ -104,18 +98,17 @@ class CheckoutScreen extends StatelessWidget {
                             Icons.arrow_forward,
                             color: Colors.white,
                           ),
-                        ),
+                        )
                       ],
                     ),
                   ),
-
+                  const SizedBox(height: 20),
                   // order summary
-                  const SizedBox(height: 20.0),
                   Text(
                     'ORDER SUMMARY',
                     style: Theme.of(context).textTheme.headline3,
                   ),
-                  const OrderSummary(),
+                  const OrderSummary()
                 ],
               );
             } else {
@@ -133,7 +126,7 @@ class CheckoutScreen extends StatelessWidget {
     String labelText,
   ) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(5.0),
       child: Row(
         children: [
           SizedBox(
@@ -148,15 +141,13 @@ class CheckoutScreen extends StatelessWidget {
               onChanged: onChanged,
               decoration: const InputDecoration(
                 isDense: true,
-                contentPadding: EdgeInsets.only(left: 10.0),
+                contentPadding:  EdgeInsets.only(left: 10),
                 focusedBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Colors.black,
-                  ),
+                  borderSide: BorderSide(color: Colors.black),
                 ),
               ),
             ),
-          )
+          ),
         ],
       ),
     );
