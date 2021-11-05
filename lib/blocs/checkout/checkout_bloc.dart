@@ -1,11 +1,11 @@
+// ignore_for_file: avoid_print
+
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_ecommerce_app/blocs/cart/cart_bloc.dart';
-import 'package:flutter_ecommerce_app/models/cart_model.dart';
-import 'package:flutter_ecommerce_app/models/checkout_model.dart';
-import 'package:flutter_ecommerce_app/models/product_model.dart';
+import 'package:flutter_ecommerce_app/models/models.dart';
 import 'package:flutter_ecommerce_app/repositories/checkout/checkout_repository.dart';
 
 part 'checkout_event.dart';
@@ -13,7 +13,7 @@ part 'checkout_state.dart';
 
 class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
   final CartBloc _cartBloc;
-  final CheckoutRepository? _checkoutRepository;
+  final CheckoutRepository _checkoutRepository;
   StreamSubscription? _cartSubscription;
   StreamSubscription? _checkoutSubscription;
 
@@ -22,19 +22,23 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
     required CheckoutRepository checkoutRepository,
   })  : _cartBloc = cartBloc,
         _checkoutRepository = checkoutRepository,
-        super(cartBloc is CartLoaded
-            ? CheckoutLoaded(
-                products: (cartBloc.state as CartLoaded).cart.products,
-                subtotal: (cartBloc.state as CartLoaded).cart.subtotalString,
-                deliveryFee:
-                    (cartBloc.state as CartLoaded).cart.deliveryFeeString,
-                total: (cartBloc.state as CartLoaded).cart.totalString,
-              )
-            : CheckoutLoading()) {
+        super(
+          cartBloc.state is CartLoaded
+              ? CheckoutLoaded(
+                  products: (cartBloc.state as CartLoaded).cart.products,
+                  deliveryFee:
+                      (cartBloc.state as CartLoaded).cart.deliveryFeeString,
+                  subtotal: (cartBloc.state as CartLoaded).cart.subtotalString,
+                  total: (cartBloc.state as CartLoaded).cart.totalString,
+                )
+              : CheckoutLoading(),
+        ) {
     _cartSubscription = cartBloc.stream.listen((state) {
-      if (state is CartLoaded) {
-        add(UpdateCheckout(cart: state.cart));
-      }
+      if (state is CartLoaded)
+        // ignore: curly_braces_in_flow_control_structures
+        add(
+          UpdateCheckout(cart: state.cart),
+        );
     });
   }
 
@@ -43,12 +47,9 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
   Stream<CheckoutState> mapEventToState(
     CheckoutEvent event,
   ) async* {
-    // event update checkout
     if (event is UpdateCheckout) {
       yield* _mapUpdateCheckoutToState(event, state);
     }
-
-    // event confirm checkout
     if (event is ConfirmCheckout) {
       yield* _mapConfirmCheckoutToState(event, state);
     }
@@ -75,7 +76,7 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
     }
   }
 
-  // STREAM - mapConfirmCheckoutToState
+// STREAM - mapConfirmCheckoutToState
   Stream<CheckoutState> _mapConfirmCheckoutToState(
     ConfirmCheckout event,
     CheckoutState state,
@@ -83,9 +84,8 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
     _checkoutSubscription?.cancel();
     if (state is CheckoutLoaded) {
       try {
-        await _checkoutRepository!.addCheckout(event.checkout);
-        // ignore: avoid_print
-        print(':::::: done');
+        await _checkoutRepository.addCheckout(event.checkout);
+        print('::::: STREAM - mapConfirmCheckoutToState ::::: Done');
         yield CheckoutLoading();
       } catch (_) {}
     }
