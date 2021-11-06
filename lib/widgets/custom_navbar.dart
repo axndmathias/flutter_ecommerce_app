@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_ecommerce_app/blocs/checkout/checkout_bloc.dart';
 import 'package:flutter_ecommerce_app/blocs/cart/cart_bloc.dart';
 import 'package:flutter_ecommerce_app/blocs/wishlist/wishlist_bloc.dart';
 import 'package:flutter_ecommerce_app/models/models.dart';
@@ -49,7 +50,7 @@ class CustomNavBar extends StatelessWidget {
     }
   }
 
-// build nav bar
+  // build nav bar
   List<Widget> _buildNavBar(context) {
     return [
       IconButton(
@@ -72,11 +73,9 @@ class CustomNavBar extends StatelessWidget {
       )
     ];
   }
-}
 
-// build add to cart nav bar
- // ignore: unused_element
- List<Widget> _buildAddToCartNavBar(context, product) {
+  // build add to cart nav bar
+  List<Widget> _buildAddToCartNavBar(context, product) {
     return [
       IconButton(
         icon: const Icon(Icons.share, color: Colors.white),
@@ -89,7 +88,7 @@ class CustomNavBar extends StatelessWidget {
           }
           if (state is WishlistLoaded) {
             return IconButton(
-              icon: const Icon(Icons.favorite, color: Colors.white),
+              icon:  const Icon(Icons.favorite, color: Colors.white),
               onPressed: () {
                 final snackBar =
                     SnackBar(content: Text('Added to your Wishlist!'));
@@ -128,8 +127,8 @@ class CustomNavBar extends StatelessWidget {
     ];
   }
 
-// bluid go to checkout nav bar
-List<Widget> _buildGoToCheckoutNavBar(context) {
+  // bluid go to checkout nav bar
+  List<Widget> _buildGoToCheckoutNavBar(context) {
     return [
       ElevatedButton(
         onPressed: () {
@@ -147,21 +146,37 @@ List<Widget> _buildGoToCheckoutNavBar(context) {
     ];
   }
 
-// build order now nav bar
-List<Widget> _buildOrderNowNavBar(context) {
+  // build order now nav bar
+  List<Widget> _buildOrderNowNavBar(context) {
     return [
-      ElevatedButton(
-        onPressed: () {
-          
+      BlocBuilder<CheckoutBloc, CheckoutState>(
+        builder: (context, state) {
+          if (state is CheckoutLoading) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+          if (state is CheckoutLoaded) {
+            return ElevatedButton(
+              onPressed: () {
+                context
+                    .read<CheckoutBloc>()
+                    .add(ConfirmCheckout(checkout: state.checkout));
+              },
+              style: ElevatedButton.styleFrom(
+                primary: Colors.white,
+                shape: const RoundedRectangleBorder(),
+              ),
+              child: Text(
+                'ORDER NOW',
+                style: Theme.of(context).textTheme.headline3,
+              ),
+            );
+          } else {
+            return const Text('Something went wrong');
+          }
         },
-        style: ElevatedButton.styleFrom(
-          primary: Colors.white,
-          shape: const RoundedRectangleBorder(),
-        ),
-        child: Text(
-          'ORDER NOW',
-          style: Theme.of(context).textTheme.headline3,
-        ),
       )
     ];
   }
+}
