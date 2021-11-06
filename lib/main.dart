@@ -54,7 +54,7 @@ class MyApp extends StatelessWidget {
         theme: theme(),
         debugShowCheckedModeBanner: false,
         onGenerateRoute: AppRouter.onGenarateRoute,
-        initialRoute: CheckoutScreen.routeName,
+        initialRoute: SplashScreen.routeName,
       ),
     );
   }
